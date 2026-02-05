@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Valentine 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    #box {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      color: #ff3366;
+    }
+
+    button {
+      font-size: 22px;
+      padding: 12px 25px;
+      margin: 15px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yes {
+      background: #ff3366;
+      color: white;
+    }
+
+    #no {
+      background: #ccc;
+      position: absolute;
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 30px;
+      animation: float 4s linear forwards;
+    }
+
+    @keyframes float {
+      0% {
+        bottom: -20px;
+        opacity: 1;
+      }
+      100% {
+        bottom: 100%;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="box">
+    <h1>Will you be my Valentine? 💘</h1>
+
+    <button id="yes">Yes ❤️</button>
+    <button id="no">No 💔</button>
+  </div>
+
+  <script>
+    let yesBtn = document.getElementById("yes");
+    let noBtn = document.getElementById("no");
+    let box = document.getElementById("box");
+
+    let size = 22;
+
+    // NO makes YES bigger
+    noBtn.addEventListener("click", function () {
+      size += 8;
+      yesBtn.style.fontSize = size + "px";
+    });
+
+    // NO runs away
+    noBtn.addEventListener("mouseover", function () {
+      let x = Math.random() * (window.innerWidth - 100);
+      let y = Math.random() * (window.innerHeight - 100);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    // When YES is clicked
+    yesBtn.addEventListener("click", function () {
+
+      // Change screen
+      box.innerHTML = `
+        <h1>Yaaay!! 💖🥰</h1>
+        <p>You just made me the happiest person 😘</p>
+        <h2>Happy Valentine ❤️</h2>
+      `;
+
+      // Hearts animation
+      setInterval(createHeart, 300);
+    });
+
+    function createHeart() {
+      let heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+
+      heart.style.left = Math.random() * 100 + "vw";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
+  </script>
+
+</body>
+</html>
